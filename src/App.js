@@ -1,6 +1,3 @@
-// CityView Project using React (useeffect, usestate)
-
-
 
 import './App.css';
 import {SearchBar} from "./SearchBar";
@@ -10,54 +7,44 @@ import {SearchBarCityView} from "./SearchBarCityView";
 import {DisplayCityView} from "./DisplayCityView";
 
 function App() {
-    const [name , setName] = useState(null)
-    //create a function to accept the value from child and set state(setName)
+    //create a state to store the selected index from child
+    const [selectedIndex, setSelectedIndex] = useState(0)
+    const updateIndex = value => setSelectedIndex(value)
 
-    //create a state tp store the results fetched by child
+    //create a state to store the results fetched by child
     const [imgList, setImgList] = useState([])
-
     const updateImgList = value => setImgList(value)
-
-
-    const updateName = (value)=>{
-        console.log(value)
-        setName(value)
-    }
-    const conversion = () =>{
-        setName(name => name.toUpperCase())
-    }
-
-
 
     return (
         <div className="App">
-            <h1>Parent</h1>
-            <p>{name}</p>
+            {imgList.length !== 0 && <h1>{imgList[selectedIndex].des}</h1>}
             {/*<p>{JSON.stringify(imgList)}</p>*/}
             {/*<SearchBar updateName = {updateName}/>*/}
             <SearchBarCityView
-                updateName = {updateName}
-                updateImgList = {updateImgList}
+                updateImgList={updateImgList}
+                updateIndex = {updateIndex}
             />
             <hr/>
             <hr/>
             {/*<Display*/}
             {/*    name = {name}*/}
-            {/*    conversion={conversion}*/}
+            {/*    conversion = {conversion}*/}
             {/*/>*/}
             <DisplayCityView
-                name = {name}
-                conversion={conversion}
+                imgList={imgList}
+                updateIndex = {updateIndex}
             />
-            {imgList.length !==0 && <img
-                style={{height:'100vh',
+            {imgList.length !== 0 && <img
+                style={{
+                    height: '100vh',
                     width: '100vw',
                     position: 'absolute',
-                    zIndex: -1
+                    zIndex: -1,
                 }}
-                src={imgList[0].urls.regular} alt=""/>}
 
-            {/*if imgList is an object ,use !!imgList instead of imgList.length!==0*/}
+                src={imgList[selectedIndex].regular} alt={imgList[selectedIndex].des}/>}
+            {/*if imgList is an object, use !!imgList instead of imgList.length !== 0 to make sure the object is not empty*/}
+
         </div>
     );
 }

@@ -1,11 +1,15 @@
-export const DisplayCityView = ({name,conversion}) => {
+import './DisplayCityView.scss'
+
+export const DisplayCityView = ({imgList, updateIndex}) => {
     return (
-        <div style={{border: 'red 2px solid',width:'400px',height: '200px'}}>
-            <h3>Display Child</h3>
-            <p>{name}</p>
-            <button
-                onClick={conversion}
-            >CONVERT TO UPPERCASE</button>
+        <div className='display-city-view-container'>
+            {imgList.map((item, index) => <img
+                // pass the clicked index to parent
+                onClick={() => updateIndex(index)}
+                key = {index}
+                src= {item.thumb}
+                alt=""/>)
+            }
         </div>
     )
 }

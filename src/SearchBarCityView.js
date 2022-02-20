@@ -1,63 +1,91 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
-const unsplashKey = '4RiTPmd0j55PK6LmYgwcy_Zw2A5iKghipNnopNC0k4E';
+
+const unsplashKey = '-vX8RabSM-Md7JP0tqtJ_Xdnfua4H56EcO4fS2JTdok'
 const unsplashUrl = 'https://api.unsplash.com/search/photos'
 
-export const SearchBarCityView = ({updateName,updateImgList}) => {
-    //2015 new feature
-    const [name,setName] = useState(null)
+export const SearchBarCityView = ({updateImgList, updateIndex}) => {
+    const [inputName, setInputName] = useState('Toronto')
 
-    //obtain the input value when enter key is press
+    //1. when the component did mount, call searchcity, dependency should be empty
+    //2. when the state (inputName) is changed, call searchCity
+    useEffect(() => {
+        searchCity(inputName)
+    }, [inputName])
+
+    const [name, setName] = useState(null)
+
+    //obtain and clean the input value when 'enter' key is pressed
     const keyDownHandler = evt => {
-        console.log(evt.key)
-        if(evt.key === 'Enter'){
+        // console.log(evt.key)
+        if (evt.key === 'Enter') {
+            updateIndex(0)
+            //js syntax can be used in react. when hit enter, all texts in the input will be selected
+            document.getElementById('myInput').select()
             let userInputName = evt.target.value.trim().toLowerCase()
-            searchCity(userInputName)
+            // call searchCity
+            // searchCity(userInputName)
+            setInputName(userInputName)
         }
     }
-    //define search city function
-    const searchCity = inputCity => {
 
+    //define searchCity function
+    const searchCity = inputCity => {
+        // console.log(inputCity)
         // axios
+        // https://api.unsplash.com/search/photos
+        // client_id=${access_key}
+        // &query=${searchCity}
+        // &orientation=landscape`
+
         axios.get(unsplashUrl, {
-            params:{
+            params: {
                 query: inputCity,
-                orientation:'landscape'
+                orientation: 'landscape',
+
             },
-            headers:{
+            headers: {
                 Authorization: `Client-ID ${unsplashKey}`
             }
         }).then(
             res => {
-
+                // console.log(res)
                 // let myres = res.data.results
-                // console.log(myres)
+                //     console.log(myres)
+                //     same to
                 let {data: {results}} = res
-
-                updateImgList(results)
+                //reorganize the data structure
+                //[{des:'', regular:'', thumb:''}, {}, {}...]
+                console.log(results)
+                let newRes = results.map(item =>({
+                    des: item.alt_description,
+                    regular: item.urls.regular,
+                    thumb: item.urls.thumb
+                }))
+                console.log(newRes)
+                updateImgList(newRes)
             }
-        ).catch(error => console.log(error))
-
-
+        ).catch(err => console.log(err))
     }
 
-
-
     return (
-        <div style={{border: 'orange 2px solid',width:'400px',height: '200px'}}>
+        <div style={{
+            border: '2px solid blue',
+            width: '400px',
+            height: '200px',
+            backgroundColor: 'rgba(255, 255, 255, 0.5)'
+        }}>
             <label htmlFor="">Please input name: </label>
             <input
-                onChange={
-                    evt => {
-                        console.log(evt.target.value)
-                        updateName(evt.target.value)
-                        setName(evt.target.value)
-                    }
-                }
+                id='myInput'
+                onChange={evt => {
+                    // console.log(evt.target.value)
+                    setName(evt.target.value)
+                }}
                 onKeyDown={keyDownHandler}
+
                 type="text"/>
-            <h3>Input Child</h3>
-            <p>{name}</p>
+            <h3>{name}</h3>
         </div>
     )
 }

@@ -1,0 +1,21 @@
+.display-city-view-container {
+  position: fixed;
+  bottom: 10vh;
+  width: 80vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.display-city-view-container img {
+  width: 100px;
+  height: 100px;
+  border: white 2px solid;
+  border-radius: 50%;
+  transition: 0.2s linear all;
+}
+.display-city-view-container img:hover {
+  transform: scale(1.2) translateY(-10px);
+  border: red 2px solid;
+}
+
+/*# sourceMappingURL=DisplayCityView.css.map */
