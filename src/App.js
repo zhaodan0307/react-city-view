@@ -11,6 +11,7 @@ function App() {
     const [selectedIndex, setSelectedIndex] = useState(0)
     const updateIndex = value => setSelectedIndex(value)
 
+
     //create a state to store the results fetched by child
     const [imgList, setImgList] = useState([])
     const updateImgList = value => setImgList(value)
