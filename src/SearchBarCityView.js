@@ -15,6 +15,7 @@ export const SearchBarCityView = ({updateImgList, updateIndex}) => {
 
     const [name, setName] = useState(null)
 
+
     //obtain and clean the input value when 'enter' key is pressed
     const keyDownHandler = evt => {
         // console.log(evt.key)
@@ -72,8 +73,11 @@ export const SearchBarCityView = ({updateImgList, updateIndex}) => {
         <div style={{
             border: '2px solid blue',
             width: '400px',
-            height: '200px',
-            backgroundColor: 'rgba(255, 255, 255, 0.5)'
+            height: '100px',
+            backgroundColor: 'rgba(255, 255, 255, 0.5)',
+            position: 'absolute',
+            top:'5vh',
+            right:'5vw'
         }}>
             <label htmlFor="">Please input name: </label>
             <input
@@ -86,6 +90,7 @@ export const SearchBarCityView = ({updateImgList, updateIndex}) => {
 
                 type="text"/>
             <h3>{name}</h3>
+
         </div>
     )
 }

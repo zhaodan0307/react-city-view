@@ -65,10 +65,11 @@ function App() {
                     e.target.hidden =false
                     setIsLoading(false)
 
-                }
+                    }
                 }
                 src={imgList[selectedIndex].regular} alt={imgList[selectedIndex].des}/>}
             {/*if imgList is an object, use !!imgList instead of imgList.length !== 0 to make sure the object is not empty*/}
+
 
         </div>
     );

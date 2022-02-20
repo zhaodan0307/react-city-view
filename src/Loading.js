@@ -1,6 +1,6 @@
 
 import "./Loading.scss"
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 export const Loading = ({isLoading}) => {
 
 
@@ -8,12 +8,16 @@ export const Loading = ({isLoading}) => {
 
         ()=>{
 
-            if(isLoading){
-                document.getElementById('con').style.display = "flex";
-            }else{
-                document.getElementById('con').style.display = "none"
+            if(isLoading === false){
+                for (let elementsByClassNameElement of document.getElementsByClassName('loading-container')) {
+                   elementsByClassNameElement.style.display = 'none'
+                }
             }
-
+            if(isLoading){
+                for (let elementsByClassNameElement of document.getElementsByClassName('loading-container')) {
+                    elementsByClassNameElement.style.display = 'flex'
+                }
+            }
 
 
         },[isLoading]
@@ -29,5 +33,7 @@ export const Loading = ({isLoading}) => {
         </div>
     )
 
-    
+
 }
+
+React.memo(Loading)
