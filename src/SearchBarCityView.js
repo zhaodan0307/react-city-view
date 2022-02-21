@@ -4,15 +4,15 @@ import axios from "axios";
 const unsplashKey = '-vX8RabSM-Md7JP0tqtJ_Xdnfua4H56EcO4fS2JTdok'
 const unsplashUrl = 'https://api.unsplash.com/search/photos'
 
-export const SearchBarCityView = ({updateImgList, updateIndex,updateCity}) => {
+export const SearchBarCityView = ({updateImgList, updateIndex,updateCity,updatePage}) => {
     const [inputName, setInputName] = useState('Toronto')
 
     //1. when the component did mount, call searchcity, dependency should be empty
     //2. when the state (inputName) is changed, call searchCity
     useEffect(() => {
         updateCity(inputName)
-        searchCity(inputName)
-    }, [inputName])
+        searchCity(inputName,updatePage)
+    }, [inputName,updatePage])
 
     const [name, setName] = useState(null)
 
@@ -33,7 +33,7 @@ export const SearchBarCityView = ({updateImgList, updateIndex,updateCity}) => {
     }
 
     //define searchCity function
-    const searchCity = inputCity => {
+    const searchCity = (inputCity,page) => {
         // console.log(inputCity)
         // axios
         // https://api.unsplash.com/search/photos
@@ -45,6 +45,7 @@ export const SearchBarCityView = ({updateImgList, updateIndex,updateCity}) => {
             params: {
                 query: inputCity,
                 orientation: 'landscape',
+                page:page
 
             },
             headers: {
@@ -52,7 +53,7 @@ export const SearchBarCityView = ({updateImgList, updateIndex,updateCity}) => {
             }
         }).then(
             res => {
-                // console.log(res)
+                console.log(res.config.params)
                 // let myres = res.data.results
                 //     console.log(myres)
                 //     same to

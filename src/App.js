@@ -6,6 +6,7 @@ import {useEffect, useState} from "react";
 import {SearchBarCityView} from "./SearchBarCityView";
 import {DisplayCityView} from "./DisplayCityView";
 import {Loading} from "./Loading";
+import { ImArrowRight,ImArrowLeft } from "react-icons/im";
 
 function App() {
     //create a state to store the selected index from child
@@ -23,16 +24,25 @@ function App() {
     const updateCity = value => setCity(value)
 
 
+    //add page
+    const [page,setPage] = useState(1)
+
+
+
+
     useEffect(()=>{
         document.getElementsByTagName('img').hidden = true
         setIsLoading(true)
     },[selectedIndex,imgList])
 
-
+    useEffect(()=>{
+        setPage(1)
+    },[city])
 
 
     return (
         <div className="App">
+
             {imgList.length !== 0 && <h1>{imgList[selectedIndex].des}</h1>}
             {/*<p>{JSON.stringify(imgList)}</p>*/}
             {/*<SearchBar updateName = {updateName}/>*/}
@@ -40,9 +50,10 @@ function App() {
                 updateImgList={updateImgList}
                 updateIndex = {updateIndex}
                 updateCity={updateCity}
+                updatePage = {page}
             />
             <hr/>
-            <h3>{city}</h3>
+
             <hr/>
             {/*<Display*/}
             {/*    name = {name}*/}
@@ -67,7 +78,7 @@ function App() {
                  }}
 
                 onLoad = { e => {
-                    console.log("now is onload")
+
                     e.target.hidden =false
                     setIsLoading(false)
 
@@ -76,7 +87,16 @@ function App() {
                 src={imgList[selectedIndex].regular} alt={imgList[selectedIndex].des}/>}
             {/*if imgList is an object, use !!imgList instead of imgList.length !== 0 to make sure the object is not empty*/}
 
-
+            <button className="left-btn"
+                onClick={()=>{
+                    page > 1 && setPage(page => page - 1)
+                }}
+            ><ImArrowLeft/></button>
+            <button className="right-btn"
+                onClick={()=>{
+                    setPage(page => page + 1)
+                }}
+            ><ImArrowRight/></button>
         </div>
     );
 }

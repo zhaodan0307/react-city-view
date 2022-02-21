@@ -1,13 +1,18 @@
 .display-city-view-container{
   position: absolute;
-  bottom: 30vh;
+  bottom: 20vh;
   width: 80vw;
   display: flex;
   align-items: center;
   justify-content: space-around;
 
   .imgGroup{
+    width: 100px;
+    height: 100px;
     position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
     img{
       position: absolute;

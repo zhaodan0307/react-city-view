@@ -12,4 +12,35 @@
 }
 
 
+button{
+  position: absolute;
+  bottom: 20vh;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  color: white;
+  background-color: transparent;
+  font-size: xx-large;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 200ms;
+}
 
+button:hover{
+  transform: scale(1.2);
+  background-color: rgba(0,0,0,0.5);
+}
+
+button:active{
+  background-color: rgba(255,255,255,0.5);
+  color: black;
+}
+
+.left-btn{
+  left: 60px;
+}
+.right-btn{
+  right: 60px;
+}

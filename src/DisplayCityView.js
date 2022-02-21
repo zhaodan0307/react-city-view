@@ -7,8 +7,10 @@ export const DisplayCityView = ({imgList, updateIndex}) => {
 
     useEffect(()=>{
         setIsLoading(true)
-        document.getElementsByTagName('img').hidden = true
-        {console.log({isLoading})}
+        for (let elementsByClassNameElement of document.getElementsByClassName('imgGroup')) {
+           elementsByClassNameElement.hidden = false
+        }
+
     },[imgList])
 
     const [isLoading,setIsLoading] = useState(true)
@@ -22,10 +24,10 @@ export const DisplayCityView = ({imgList, updateIndex}) => {
                         <img
                             hidden
                             // pass the clicked index to parent
-                            onClick={() => updateIndex(index)}
+                            onClick = {() => updateIndex(index)}
                             onLoad = {
                                 e => {
-                                console.log("gallery is onload")
+
                                 e.target.hidden = false
                                 setIsLoading(false)
 
