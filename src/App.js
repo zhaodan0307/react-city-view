@@ -19,12 +19,16 @@ function App() {
 
     //create a state to show whether loading
     const [isLoading,setIsLoading] = useState(true)
+    const [city,setCity] = useState(null)
+    const updateCity = value => setCity(value)
 
 
     useEffect(()=>{
         document.getElementsByTagName('img').hidden = true
         setIsLoading(true)
     },[selectedIndex,imgList])
+
+
 
 
     return (
@@ -35,8 +39,10 @@ function App() {
             <SearchBarCityView
                 updateImgList={updateImgList}
                 updateIndex = {updateIndex}
+                updateCity={updateCity}
             />
             <hr/>
+            <h3>{city}</h3>
             <hr/>
             {/*<Display*/}
             {/*    name = {name}*/}

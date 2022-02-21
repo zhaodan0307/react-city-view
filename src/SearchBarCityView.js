@@ -4,12 +4,13 @@ import axios from "axios";
 const unsplashKey = '-vX8RabSM-Md7JP0tqtJ_Xdnfua4H56EcO4fS2JTdok'
 const unsplashUrl = 'https://api.unsplash.com/search/photos'
 
-export const SearchBarCityView = ({updateImgList, updateIndex}) => {
+export const SearchBarCityView = ({updateImgList, updateIndex,updateCity}) => {
     const [inputName, setInputName] = useState('Toronto')
 
     //1. when the component did mount, call searchcity, dependency should be empty
     //2. when the state (inputName) is changed, call searchCity
     useEffect(() => {
+        updateCity(inputName)
         searchCity(inputName)
     }, [inputName])
 
@@ -27,6 +28,7 @@ export const SearchBarCityView = ({updateImgList, updateIndex}) => {
             // call searchCity
             // searchCity(userInputName)
             setInputName(userInputName)
+
         }
     }
 
