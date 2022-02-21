@@ -4,8 +4,9 @@ import axios from "axios";
 const unsplashKey = '-vX8RabSM-Md7JP0tqtJ_Xdnfua4H56EcO4fS2JTdok'
 const unsplashUrl = 'https://api.unsplash.com/search/photos'
 
-export const SearchBarCityView = ({updateImgList, updateIndex,updateCity,updatePage,updateBackImg}) => {
+export const SearchBarCityView = ({updateImgList, updateIndex,updateCity,updatePage,updateBackImg,updateSendBack}) => {
     const [inputName, setInputName] = useState('Toronto')
+
 
     //1. when the component did mount, call searchcity, dependency should be empty
     //2. when the state (inputName) is changed, call searchCity
@@ -22,6 +23,7 @@ export const SearchBarCityView = ({updateImgList, updateIndex,updateCity,updateP
         // console.log(evt.key)
         if (evt.key === 'Enter') {
             updateIndex(0)
+
             //js syntax can be used in react. when hit enter, all texts in the input will be selected
             document.getElementById('myInput').select()
             let userInputName = evt.target.value.trim().toLowerCase()
@@ -68,7 +70,7 @@ export const SearchBarCityView = ({updateImgList, updateIndex,updateCity,updateP
                 }))
                 console.log(newRes)
                 updateImgList(newRes)
-                page === 1 && updateBackImg({regular:newRes[0].regular,des:newRes[0].des})
+                page === 1 && updateSendBack && updateBackImg({regular:newRes[0].regular,des:newRes[0].des})
             }
         ).catch(err => console.log(err))
     }

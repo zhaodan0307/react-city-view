@@ -31,6 +31,7 @@ function App() {
     const [backImage,setBackImage] = useState(null)
     const [newbackImage,setNewBackImage] = useState(null)
     const updateBackImg = value => setBackImage(value)
+    const [sendBack,setSendBack] = useState(true)
 
 
 
@@ -72,6 +73,7 @@ function App() {
                 updateCity={updateCity}
                 updatePage = {page}
                 updateBackImg={updateBackImg}
+                updateSendBack={sendBack}
             />
             <hr/>
 
@@ -135,10 +137,12 @@ function App() {
             <button className="left-btn"
                 onClick={()=>{
                     page > 1 && setPage(page => page - 1)
+                    setSendBack(false)
                 }}
             ><ImArrowLeft/></button>
             <button className="right-btn"
                 onClick={()=>{
+                    setSendBack(true)
                     setPage(page => page + 1)
                 }}
             ><ImArrowRight/></button>
