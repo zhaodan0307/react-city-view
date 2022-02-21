@@ -3,7 +3,7 @@ import React,{useEffect, useState} from "react";
 import {Loading} from "./Loading";
 
 
-export const DisplayCityView = ({imgList, updateIndex}) => {
+export const DisplayCityView = ({imgList, updateIndex,updateBackImg}) => {
 
     useEffect(()=>{
         setIsLoading(true)
@@ -24,7 +24,10 @@ export const DisplayCityView = ({imgList, updateIndex}) => {
                         <img
                             hidden
                             // pass the clicked index to parent
-                            onClick = {() => updateIndex(index)}
+                            onClick = {() =>{
+                                updateIndex(index)
+                                updateBackImg({regular:item.regular,des:item.des})
+                            } }
                             onLoad = {
                                 e => {
 

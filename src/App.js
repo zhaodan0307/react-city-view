@@ -27,6 +27,10 @@ function App() {
     //add page
     const [page,setPage] = useState(1)
 
+    //add img
+    const [backImage,setBackImage] = useState(null)
+    const [newbackImage,setNewBackImage] = useState(null)
+    const updateBackImg = value => setBackImage(value)
 
 
 
@@ -36,14 +40,28 @@ function App() {
     },[selectedIndex,imgList])
 
     useEffect(()=>{
+        document.getElementsByTagName('img').hidden = true
         setPage(1)
     },[city])
+
+    useEffect( ()=> {
+
+        if(backImage !== null)
+        {
+            setNewBackImage(backImage)
+            console.log("useEffect to change the background Image")
+        }
+
+
+    },[backImage])
+
 
 
     return (
         <div className="App">
 
-            {imgList.length !== 0 && <h1>{imgList[selectedIndex].des}</h1>}
+            {imgList.length !== 0 && newbackImage !== null && <h1>{newbackImage.des}</h1>}
+            {imgList.length !== 0 && newbackImage === null && <h1>{imgList[0].des}</h1>}
             {/*<p>{JSON.stringify(imgList)}</p>*/}
             {/*<SearchBar updateName = {updateName}/>*/}
             <SearchBarCityView
@@ -62,11 +80,12 @@ function App() {
             <DisplayCityView
                 imgList={imgList}
                 updateIndex = {updateIndex}
+                updateBackImg={updateBackImg}
             />
             <Loading
                 isLoading = {isLoading}
             />
-            {imgList.length !== 0 && <img
+            {imgList.length !== 0 && newbackImage !== null &&<img
 
                 hidden
                 style={{
@@ -84,7 +103,30 @@ function App() {
 
                     }
                 }
-                src={imgList[selectedIndex].regular} alt={imgList[selectedIndex].des}/>}
+                src={newbackImage.regular} alt={newbackImage.des}/>}
+
+
+            {imgList.length !== 0 && newbackImage === null &&<img
+
+                hidden
+                style={{
+                    height: '100vh',
+                    width: '100vw',
+                    position: 'absolute',
+                    zIndex: -1,
+
+                }}
+
+                onLoad = { e => {
+
+                    e.target.hidden =false
+                    setIsLoading(false)
+
+                }
+                }
+                src={imgList[0].regular} alt={imgList[0].des}/>}
+
+
             {/*if imgList is an object, use !!imgList instead of imgList.length !== 0 to make sure the object is not empty*/}
 
             <button className="left-btn"
