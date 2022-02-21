@@ -16,6 +16,7 @@ export const SearchBarCityView = ({updateImgList, updateIndex,updateCity,updateP
     }, [inputName,updatePage])
 
     const [name, setName] = useState(null)
+    const [inputChange,setInputChange] = useState(true)
 
 
     //obtain and clean the input value when 'enter' key is pressed
@@ -23,6 +24,7 @@ export const SearchBarCityView = ({updateImgList, updateIndex,updateCity,updateP
         // console.log(evt.key)
         if (evt.key === 'Enter') {
             updateIndex(0)
+            setInputChange(true)
 
             //js syntax can be used in react. when hit enter, all texts in the input will be selected
             document.getElementById('myInput').select()
@@ -70,7 +72,8 @@ export const SearchBarCityView = ({updateImgList, updateIndex,updateCity,updateP
                 }))
                 console.log(newRes)
                 updateImgList(newRes)
-                page === 1 && updateSendBack && updateBackImg({regular:newRes[0].regular,des:newRes[0].des})
+                page === 1 && (updateSendBack||inputChange) && updateBackImg({regular:newRes[0].regular,des:newRes[0].des})
+                setInputChange(false)
             }
         ).catch(err => console.log(err))
     }

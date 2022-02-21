@@ -1,0 +1,23 @@
+.searchBarContainer {
+  width: 300px;
+  height: 100px;
+  position: absolute;
+  top: 5vh;
+  right: 5vw;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: opacity(20%);
+}
+.searchBarContainer input {
+  padding: 10px 2px;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  background-color: #fff;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3) inset;
+  color: #a9a90d;
+  font-size: large;
+}
+
+/*# sourceMappingURL=SearchBarCityView.css.map */
