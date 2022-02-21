@@ -4,7 +4,7 @@ import axios from "axios";
 const unsplashKey = '-vX8RabSM-Md7JP0tqtJ_Xdnfua4H56EcO4fS2JTdok'
 const unsplashUrl = 'https://api.unsplash.com/search/photos'
 
-export const SearchBarCityView = ({updateImgList, updateIndex,updateCity,updatePage}) => {
+export const SearchBarCityView = ({updateImgList, updateIndex,updateCity,updatePage,updateBackImg}) => {
     const [inputName, setInputName] = useState('Toronto')
 
     //1. when the component did mount, call searchcity, dependency should be empty
@@ -68,6 +68,7 @@ export const SearchBarCityView = ({updateImgList, updateIndex,updateCity,updateP
                 }))
                 console.log(newRes)
                 updateImgList(newRes)
+                page === 1 && updateBackImg({regular:newRes[0].regular,des:newRes[0].des})
             }
         ).catch(err => console.log(err))
     }

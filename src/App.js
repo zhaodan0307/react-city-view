@@ -39,9 +39,11 @@ function App() {
         setIsLoading(true)
     },[selectedIndex,imgList])
 
+
     useEffect(()=>{
         document.getElementsByTagName('img').hidden = true
         setPage(1)
+       if(imgList.length !== 0) {document.getElementById('back').src = imgList[selectedIndex].src}
     },[city])
 
     useEffect( ()=> {
@@ -69,6 +71,7 @@ function App() {
                 updateIndex = {updateIndex}
                 updateCity={updateCity}
                 updatePage = {page}
+                updateBackImg={updateBackImg}
             />
             <hr/>
 
@@ -86,7 +89,7 @@ function App() {
                 isLoading = {isLoading}
             />
             {imgList.length !== 0 && newbackImage !== null &&<img
-
+                id = 'back'
                 hidden
                 style={{
                     height: '100vh',
@@ -107,7 +110,7 @@ function App() {
 
 
             {imgList.length !== 0 && newbackImage === null &&<img
-
+                id='back'
                 hidden
                 style={{
                     height: '100vh',

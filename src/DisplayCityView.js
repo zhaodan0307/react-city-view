@@ -1,5 +1,5 @@
 import './DisplayCityView.css'
-import React,{useEffect, useState} from "react";
+import React, {useEffect, useLayoutEffect, useState} from "react";
 import {Loading} from "./Loading";
 
 
