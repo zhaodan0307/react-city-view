@@ -11,6 +11,20 @@
 
 }
 
+h1{
+  font-size: large;
+  color: white;
+  padding: 10px 20px;
+  font-family: 'Dancing Script', cursive;
+  font-weight: bolder;
+  background-color: rgba(0,0,0,0.7);
+
+}
+span{
+  color: #d02020;
+  font-family: 'Dancing Script', cursive;
+  font-size: xxx-large;
+}
 
 button{
   position: absolute;

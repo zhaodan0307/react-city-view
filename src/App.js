@@ -63,7 +63,7 @@ function App() {
     return (
         <div className="App">
 
-            {imgList.length !== 0 && newbackImage !== null && <h1>{newbackImage.des}</h1>}
+            {imgList.length !== 0 && newbackImage !== null && <h1><span>{city}</span> - {newbackImage.des}</h1>}
             {imgList.length !== 0 && newbackImage === null && <h1>{imgList[0].des}</h1>}
             {/*<p>{JSON.stringify(imgList)}</p>*/}
             {/*<SearchBar updateName = {updateName}/>*/}
@@ -76,7 +76,9 @@ function App() {
                 updateSendBack={sendBack}
             />
             <hr/>
-
+            <h4
+               style={{fontFamily: `'Dancing Script', cursive`}}
+            >dasdasdada</h4>
             <hr/>
             {/*<Display*/}
             {/*    name = {name}*/}

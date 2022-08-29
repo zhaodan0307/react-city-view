@@ -1,5 +1,6 @@
-import {useEffect, useState} from "react";
+import React,{useEffect, useState} from "react";
 import axios from "axios";
+import './SearchBarCityView.scss'
 
 const unsplashKey = '-vX8RabSM-Md7JP0tqtJ_Xdnfua4H56EcO4fS2JTdok'
 const unsplashUrl = 'https://api.unsplash.com/search/photos'
@@ -79,17 +80,11 @@ export const SearchBarCityView = ({updateImgList, updateIndex,updateCity,updateP
     }
 
     return (
-        <div style={{
-            border: '2px solid blue',
-            width: '400px',
-            height: '100px',
-            backgroundColor: 'rgba(255, 255, 255, 0.5)',
-            position: 'absolute',
-            top:'5vh',
-            right:'5vw'
-        }}>
-            <label htmlFor="">Please input name: </label>
+        <div className='searchBarContainer'>
+
             <input
+                placeholder="Please Input City Here"
+                autoFocus='autoFocus'
                 id='myInput'
                 onChange={evt => {
                     // console.log(evt.target.value)
@@ -103,3 +98,5 @@ export const SearchBarCityView = ({updateImgList, updateIndex,updateCity,updateP
         </div>
     )
 }
+
+React.memo(SearchBarCityView)
